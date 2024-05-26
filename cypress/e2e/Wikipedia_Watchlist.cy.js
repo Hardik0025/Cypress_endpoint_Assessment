@@ -26,43 +26,43 @@ it('Add and Remove articles from Wikipedia watchlist', () => {
     });
 
       // Add second random article to the watchlist
-      cy.get('a').contains('Random article').click();
-      cy.get('#firstHeading').then(($title) => {
-      articleTitle2                 = $title.text().trim();
-      cy.log('Second article title:', articleTitle2);
-      sortedTitles.push(articleTitle2);
-      cy.get('#ca-watch').click();
-          cy.wait(5000);
-      });
+    cy.get('a').contains('Random article').click();
+    cy.get('#firstHeading').then(($title) => {
+    articleTitle2                 = $title.text().trim();
+    cy.log('Second article title:', articleTitle2);
+    sortedTitles.push(articleTitle2);
+    cy.get('#ca-watch').click();
+        cy.wait(5000);
+    });
 
-      // Sort the titles alphabetically
-      sortedTitles.sort();
-      const firstArticleToRemove    = sortedTitles[0];
-      const secondArticleToVerify   = sortedTitles[1];
+    // Sort the titles alphabetically
+    sortedTitles.sort();
+    const firstArticleToRemove    = sortedTitles[0];
+    const secondArticleToVerify   = sortedTitles[1];
 
-      // Navigate to the watchlist
-      cy.get('#pt-watchlist-2').click();
-      cy.wait(5000);
-      cy.get('a').contains('View and edit watchlist').click();
-      cy.contains('View and edit watchlist').should('exist');
-      cy.wait(5000);
+    // Navigate to the watchlist
+    cy.get('#pt-watchlist-2').click();
+    cy.wait(5000);
+    cy.get('a').contains('View and edit watchlist').click();
+    cy.contains('View and edit watchlist').should('exist');
+    cy.wait(5000);
 
-      // Find the first article title alphabetically and remove it
-      cy.get('.oo-ui-multiselectWidget-group > :nth-child(1) > .oo-ui-inputWidget > .oo-ui-inputWidget-input').check();
-      cy.wait(2000);
-      cy.get('#ooui-php-9 > .oo-ui-inputWidget-input').click();
+    // Find the first article title alphabetically and remove it
+    cy.get('.oo-ui-multiselectWidget-group > :nth-child(1) > .oo-ui-inputWidget > .oo-ui-inputWidget-input').check();
+    cy.wait(2000);
+    cy.get('#ooui-php-9 > .oo-ui-inputWidget-input').click();
 
-      // Verify the first article is removed from the watchlist
-      cy.get('#pt-watchlist-2').click();
-      cy.get('a').contains('View and edit watchlist').click();
-      cy.get('.oo-ui-multiselectWidget-group > :nth-child(1) > .oo-ui-inputWidget > .oo-ui-inputWidget-input').should('not.contain', firstArticleToRemove);
+    // Verify the first article is removed from the watchlist
+    cy.get('#pt-watchlist-2').click();
+    cy.get('a').contains('View and edit watchlist').click();
+    cy.get('.oo-ui-multiselectWidget-group > :nth-child(1) > .oo-ui-inputWidget > .oo-ui-inputWidget-input').should('not.contain', firstArticleToRemove);
 
       // Verify the second article is still present in the watchlist
-      cy.get('.oo-ui-multiselectWidget-group > :nth-child(1) > .oo-ui-inputWidget > .oo-ui-inputWidget-input', { timeout: 5000 }).should('exist');
+    cy.get('.oo-ui-multiselectWidget-group > :nth-child(1) > .oo-ui-inputWidget > .oo-ui-inputWidget-input', { timeout: 5000 }).should('exist');
 
       // Verify that the second article is there
-      cy.get('.oo-ui-multiselectWidget-group > :nth-child(1) > .oo-ui-inputWidget > .oo-ui-inputWidget-input').click();
-      cy.get('.oo-ui-multiselectWidget-group > :nth-child(1) > .oo-ui-inputWidget > .oo-ui-inputWidget-input').should('exist');
-      
-      });
-  });
+    cy.get('.oo-ui-multiselectWidget-group > :nth-child(1) > .oo-ui-inputWidget > .oo-ui-inputWidget-input').click();
+    cy.get('.oo-ui-multiselectWidget-group > :nth-child(1) > .oo-ui-inputWidget > .oo-ui-inputWidget-input').should('exist');
+    
+    });
+});
